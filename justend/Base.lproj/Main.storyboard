@@ -30,7 +30,14 @@
                             <outlet property="delegate" destination="uuT-mA-fbJ" id="Sup-mM-Bhr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Justend" id="m2T-lb-Qo5"/>
+                    <navigationItem key="navigationItem" title="Justend" id="m2T-lb-Qo5">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="DaY-XT-nn9">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="addButtonPressed:" destination="uuT-mA-fbJ" id="3x6-4U-6F6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8dF-Y7-pUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -60,6 +67,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
