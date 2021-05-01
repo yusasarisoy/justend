@@ -13,15 +13,12 @@ class ToDoListViewController: UITableViewController {
     /// This variable holds the to do list items as the type of [**Item**].
     var itemArray = [Item]()
     
-    /// This constant holds the data file path where the to do list items save.
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
-    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        loadItems() // This function provides to load the whole to do list items.
+        loadItems() // This function provides to load the whole to do list items.
     }
     
     // MARK: - Add New Items
@@ -59,16 +56,14 @@ class ToDoListViewController: UITableViewController {
     }
     
     /// This function provides to load the whole to do list items.
-//    private func loadItems() {
-//        if let data = try? Data(contentsOf: dataFilePath!) {
-//            let decoder = PropertyListDecoder()
-//            do {
-//                itemArray = try decoder.decode([Item].self, from: data)
-//            } catch {
-//                print("An error occurred while decoding the items: \(error)")
-//            }
-//        }
-//    }
+    private func loadItems() {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        do {
+            itemArray = try context.fetch(request)
+        } catch {
+            print("An error occurred while getting the items: \(error)")
+        }
+    }
     
     // MARK: - UITableView Data Source Methods
     
