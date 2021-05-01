@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ToDoListViewController: UITableViewController {
     
@@ -15,10 +16,12 @@ class ToDoListViewController: UITableViewController {
     /// This constant holds the data file path where the to do list items save.
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadItems() // This function provides to load the whole to do list items.
+//        loadItems() // This function provides to load the whole to do list items.
     }
     
     // MARK: - Add New Items
@@ -27,8 +30,9 @@ class ToDoListViewController: UITableViewController {
         var textField = UITextField()
         let alert = UIAlertController(title: "Add New Justend Item", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add Item", style: .default) { action in
-            let newItem = Item()
+            let newItem = Item(context: self.context)
             newItem.title = textField.text ?? "New Justend Item"
+            newItem.done = false
             self.itemArray.append(newItem)
             self.saveItems() // This function provides to save a to do list item.
         }
@@ -46,27 +50,25 @@ class ToDoListViewController: UITableViewController {
     
     /// This function provides to save a to do list item.
     private func saveItems() {
-        let encoder = PropertyListEncoder()
         do {
-            let data = try encoder.encode(itemArray)
-            try data.write(to: dataFilePath!)
+            try context.save()
         } catch {
-            print("An error occurred while encoding the item: \(error)")
+            print("An error occurred while saving the item: \(error)")
         }
         self.tableView.reloadData()
     }
     
     /// This function provides to load the whole to do list items.
-    private func loadItems() {
-        if let data = try? Data(contentsOf: dataFilePath!) {
-            let decoder = PropertyListDecoder()
-            do {
-                itemArray = try decoder.decode([Item].self, from: data)
-            } catch {
-                print("An error occurred while decoding the items: \(error)")
-            }
-        }
-    }
+//    private func loadItems() {
+//        if let data = try? Data(contentsOf: dataFilePath!) {
+//            let decoder = PropertyListDecoder()
+//            do {
+//                itemArray = try decoder.decode([Item].self, from: data)
+//            } catch {
+//                print("An error occurred while decoding the items: \(error)")
+//            }
+//        }
+//    }
     
     // MARK: - UITableView Data Source Methods
     
