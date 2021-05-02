@@ -9,5 +9,7 @@ import Foundation
 
 struct Constants {
     static let toDoItemCellIdentifier = "ToDoItemCell"
+    static let toDoCategoryCellIdentifier = "CategoryCell"
     static let toDoListArrayKey = "ToDoListArray"
+    static let categoryToItems = "goToItems"
 }

@@ -13,11 +13,16 @@ class ToDoListViewController: UITableViewController {
     /// This variable holds the to do list items as the type of [**Item**].
     var itemArray = [Item]()
     
+    var selectedCategory: Category? {
+        didSet {
+            loadItems() // This function provides to load the whole to do list items.
+        }
+    }
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadItems() // This function provides to load the whole to do list items.
     }
     
     // MARK: - Add New Items
@@ -29,6 +34,7 @@ class ToDoListViewController: UITableViewController {
             let newItem = Item(context: self.context)
             newItem.title = textField.text ?? "New Justend Item"
             newItem.done = false
+            newItem.parentCategory = self.selectedCategory
             self.itemArray.append(newItem)
             self.saveItems() // This function provides to save a to do list item.
         }
@@ -51,11 +57,19 @@ class ToDoListViewController: UITableViewController {
         } catch {
             print("An error occurred while saving the item: \(error)")
         }
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
     
     /// This function provides to load the whole to do list items.
-    private func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+    private func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
+        let categoryName = selectedCategory?.name ?? "Items"
+        navigationItem.title = categoryName
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", categoryName)
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        } else {
+            request.predicate = categoryPredicate
+        }
         do {
             itemArray = try context.fetch(request)
         } catch {
@@ -81,10 +95,7 @@ class ToDoListViewController: UITableViewController {
     // MARK: - UITableView Delegate Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        context.delete(itemArray[indexPath.row])
-        itemArray.remove(at: indexPath.row)
-        
-        //        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         saveItems() // This function provides to save a to do list item.
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -95,9 +106,10 @@ class ToDoListViewController: UITableViewController {
 extension ToDoListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let request: NSFetchRequest<Item> = Item.fetchRequest()
-        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text ?? "")
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text ?? "")
+        request.predicate = predicate
         request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        loadItems(with: request)
+        loadItems(with: request, predicate: predicate)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

@@ -15,6 +15,7 @@
 		448C61B5263AD3D500F36C8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448C61B3263AD3D500F36C8B /* Main.storyboard */; };
 		448C61B7263AD3D600F36C8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 448C61B6263AD3D600F36C8B /* Assets.xcassets */; };
 		448C61BA263AD3D600F36C8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448C61B8263AD3D600F36C8B /* LaunchScreen.storyboard */; };
+		44FCC19F263F256F000FBFCA /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FCC19E263F256F000FBFCA /* CategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		448C61B6263AD3D600F36C8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		448C61B9263AD3D600F36C8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		448C61BB263AD3D600F36C8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44FCC19E263F256F000FBFCA /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 		448C61C4263B248400F36C8B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				44FCC19E263F256F000FBFCA /* CategoryViewController.swift */,
 				448C61B1263AD3D500F36C8B /* ToDoListViewController.swift */,
 			);
 			path = Controllers;
@@ -187,6 +190,7 @@
 				448C61B2263AD3D500F36C8B /* ToDoListViewController.swift in Sources */,
 				445AB3C4263D9B5300994CCA /* DataModel.xcdatamodeld in Sources */,
 				448C61AE263AD3D500F36C8B /* AppDelegate.swift in Sources */,
+				44FCC19F263F256F000FBFCA /* CategoryViewController.swift in Sources */,
 				448C61B0263AD3D500F36C8B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
