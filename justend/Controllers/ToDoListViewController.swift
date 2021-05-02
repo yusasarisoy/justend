@@ -17,7 +17,6 @@ class ToDoListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loadItems() // This function provides to load the whole to do list items.
     }
     
@@ -56,13 +55,13 @@ class ToDoListViewController: UITableViewController {
     }
     
     /// This function provides to load the whole to do list items.
-    private func loadItems() {
-        let request: NSFetchRequest<Item> = Item.fetchRequest()
+    private func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
         do {
             itemArray = try context.fetch(request)
         } catch {
             print("An error occurred while getting the items: \(error)")
         }
+        tableView.reloadData()
     }
     
     // MARK: - UITableView Data Source Methods
@@ -85,8 +84,19 @@ class ToDoListViewController: UITableViewController {
         context.delete(itemArray[indexPath.row])
         itemArray.remove(at: indexPath.row)
         
-//        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        //        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         saveItems() // This function provides to save a to do list item.
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: - UISearchBar Methods
+
+extension ToDoListViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text ?? "")
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        loadItems(with: request)
     }
 }
