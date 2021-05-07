@@ -7,8 +7,11 @@
 
 import UIKit
 import CoreData
+import RealmSwift
 
 class CategoryViewController: UITableViewController {
+    
+    private let realm = try! Realm()
     
     /// This variable holds the to do list categories as the type of [**Category**].
     var categoryArray = [Category]()
@@ -26,10 +29,10 @@ class CategoryViewController: UITableViewController {
         var textField = UITextField()
         let alert = UIAlertController(title: "Add New Justend Category", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add Category", style: .default) { action in
-            let newCategory = Category(context: self.context)
+            let newCategory = Category()
             newCategory.name = textField.text ?? "New Justend Category"
             self.categoryArray.append(newCategory)
-            self.saveCategories() // This function provides to save a to do list categories.
+            self.saveCategory(category: newCategory) // This function provides to save a to do list category.
         }
         
         alert.addTextField { alertTextField in
@@ -44,9 +47,12 @@ class CategoryViewController: UITableViewController {
     // MARK: - Data Manipulation Methods
     
     /// This function provides to save a to do list category.
-    private func saveCategories() {
+    /// - Parameter category: This parameter holds the category as the **Category** type.
+    private func saveCategory(category: Category) {
         do {
-            try context.save()
+            try realm.write {
+                realm.add(category)
+            }
         } catch {
             print("An error occurred while saving the category: \(error)")
         }
@@ -55,13 +61,13 @@ class CategoryViewController: UITableViewController {
     
     /// This function provides to load the whole to do list categories.
     private func loadCategories() {
-        let request: NSFetchRequest<Category> = Category.fetchRequest()
-        do {
-            categoryArray = try context.fetch(request)
-        } catch {
-            print("An error occurred while getting the categories: \(error)")
-        }
-        tableView.reloadData()
+//        let request: NSFetchRequest<Category> = Category.fetchRequest()
+//        do {
+//            categoryArray = try context.fetch(request)
+//        } catch {
+//            print("An error occurred while getting the categories: \(error)")
+//        }
+//        tableView.reloadData()
     }
     
     // MARK: - UITableView Data Source Methods
