@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreData
 import RealmSwift
 
 class CategoryViewController: UITableViewController {
@@ -16,8 +15,6 @@ class CategoryViewController: UITableViewController {
     /// This variable holds the to do list categories as the type of [**Category**].
     var categoryArray: Results<Category>?
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCategories() // This function provides to load the whole to do list categories.
@@ -67,7 +64,7 @@ class CategoryViewController: UITableViewController {
     // MARK: - UITableView Data Source Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryArray?.count ?? 1
+        return categoryArray?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
