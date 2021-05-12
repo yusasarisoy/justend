@@ -16,6 +16,7 @@
 		448C61B5263AD3D500F36C8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448C61B3263AD3D500F36C8B /* Main.storyboard */; };
 		448C61B7263AD3D600F36C8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 448C61B6263AD3D600F36C8B /* Assets.xcassets */; };
 		448C61BA263AD3D600F36C8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448C61B8263AD3D600F36C8B /* LaunchScreen.storyboard */; };
+		44F238E8264C528D00E8E508 /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F238E7264C528D00E8E508 /* SwipeTableViewController.swift */; };
 		44FCC19F263F256F000FBFCA /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FCC19E263F256F000FBFCA /* CategoryViewController.swift */; };
 		6E3B62EEC84464B7974C9050 /* Pods_justend.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A441C0E42847264D8B6A5701 /* Pods_justend.framework */; };
 /* End PBXBuildFile section */
@@ -32,6 +33,7 @@
 		448C61B6263AD3D600F36C8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		448C61B9263AD3D600F36C8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		448C61BB263AD3D600F36C8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44F238E7264C528D00E8E508 /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		44FCC19E263F256F000FBFCA /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		491A8CE434BF7AC8BBF6B7B6 /* Pods-justend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-justend.release.xcconfig"; path = "Target Support Files/Pods-justend/Pods-justend.release.xcconfig"; sourceTree = "<group>"; };
 		A441C0E42847264D8B6A5701 /* Pods_justend.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_justend.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +116,7 @@
 			children = (
 				44FCC19E263F256F000FBFCA /* CategoryViewController.swift */,
 				448C61B1263AD3D500F36C8B /* ToDoListViewController.swift */,
+				44F238E7264C528D00E8E508 /* SwipeTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44F238E8264C528D00E8E508 /* SwipeTableViewController.swift in Sources */,
 				445AB3C1263D81AF00994CCA /* Constants.swift in Sources */,
 				448C61B2263AD3D500F36C8B /* ToDoListViewController.swift in Sources */,
 				448C61AE263AD3D500F36C8B /* AppDelegate.swift in Sources */,

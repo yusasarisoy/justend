@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class ToDoListViewController: UITableViewController {
+class ToDoListViewController: SwipeTableViewController {
     
     /// This variable holds the to do list items as the type of [**Item**].
     var toDoItems: Results<Item>?
@@ -23,6 +23,7 @@ class ToDoListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = 75 // Set the row height of the table view as 75.
     }
     
     // MARK: - Add New Items
@@ -63,6 +64,21 @@ class ToDoListViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    /// This function provides to delete the item.
+    /// - Parameter indexPath: This parameter holds the **IndexPath** value of the be deleted item.
+    override func updateModel(at indexPath: IndexPath) {
+        super.updateModel(at: indexPath)
+        if let item = toDoItems?[indexPath.row] {
+            do {
+                try realm.write {
+                    realm.delete(item)
+                }
+            } catch {
+                print("An error occurred while deleting the item: \(error)")
+            }
+        }
+    }
+    
     // MARK: - UITableView Data Source Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,7 +86,7 @@ class ToDoListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.toDoItemCellIdentifier, for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         if let item = toDoItems?[indexPath.row] {
             cell.textLabel?.text = item.title
             cell.accessoryType = item.done == true ? .checkmark : .none
@@ -106,7 +122,7 @@ extension ToDoListViewController: UISearchBarDelegate {
             tableView.reloadData()
         }
     }
-
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
             loadItems()
