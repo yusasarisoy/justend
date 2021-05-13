@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class CategoryViewController: SwipeTableViewController {
     
@@ -29,6 +30,7 @@ class CategoryViewController: SwipeTableViewController {
         let action = UIAlertAction(title: "Add Category", style: .default) { action in
             let newCategory = Category()
             newCategory.name = textField.text ?? "New Justend Category"
+            newCategory.color = UIColor.randomFlat().hexValue()
             self.saveCategory(category: newCategory) // This function provides to save a to do list category.
         }
         
@@ -80,12 +82,15 @@ class CategoryViewController: SwipeTableViewController {
     // MARK: - UITableView Data Source Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryArray?.count ?? 0
+        return categoryArray?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        cell.textLabel?.text = categoryArray?[indexPath.row].name
+        if let category = categoryArray?[indexPath.row] {
+            cell.backgroundColor = UIColor(hexString: category.color ?? "#fd8469")
+            cell.textLabel?.text = category.name ?? "No Categories Added Yet"
+        }
         return cell
     }
     
