@@ -25,7 +25,7 @@
 		4437BDBB2645E6C20051BFE1 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		4437BDBD2645E6C80051BFE1 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		445AB3C0263D81AF00994CCA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		448C61AA263AD3D500F36C8B /* justend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = justend.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		448C61AA263AD3D500F36C8B /* Justend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Justend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		448C61AD263AD3D500F36C8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		448C61AF263AD3D500F36C8B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		448C61B1263AD3D500F36C8B /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 		448C61AB263AD3D500F36C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				448C61AA263AD3D500F36C8B /* justend.app */,
+				448C61AA263AD3D500F36C8B /* Justend.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -165,7 +165,7 @@
 			);
 			name = justend;
 			productName = justend;
-			productReference = 448C61AA263AD3D500F36C8B /* justend.app */;
+			productReference = 448C61AA263AD3D500F36C8B /* Justend.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -423,7 +423,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.icloud.yusasarisoy.justend;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Justend;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -443,7 +443,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.icloud.yusasarisoy.justend;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Justend;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
