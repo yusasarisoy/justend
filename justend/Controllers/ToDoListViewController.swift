@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class ToDoListViewController: SwipeTableViewController {
     
@@ -24,6 +25,7 @@ class ToDoListViewController: SwipeTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 75 // Set the row height of the table view as 75.
+        tableView.separatorStyle = .none
     }
     
     // MARK: - Add New Items
@@ -89,6 +91,10 @@ class ToDoListViewController: SwipeTableViewController {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         if let item = toDoItems?[indexPath.row] {
             cell.textLabel?.text = item.title
+            if let color = UIColor(hexString: (selectedCategory?.color)!)?.darken(byPercentage: CGFloat(indexPath.row) / CGFloat(toDoItems!.count)) {
+                cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+                cell.backgroundColor = color
+            }
             cell.accessoryType = item.done == true ? .checkmark : .none
         } else {
             cell.textLabel?.text = "No Items Added"
