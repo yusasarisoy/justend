@@ -22,10 +22,26 @@ class ToDoListViewController: SwipeTableViewController {
         }
     }
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 75 // Set the row height of the table view as 75.
         tableView.separatorStyle = .none
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = selectedCategory?.name
+        if let hexColor = selectedCategory?.color {
+            
+            if let navigationBarColor = UIColor(hexString: hexColor) {
+                navigationController?.navigationBar.backgroundColor = UIColor(hexString: hexColor)
+                navigationController?.navigationBar.tintColor = ContrastColorOf(navigationBarColor, returnFlat: true)
+                searchBar.barTintColor = navigationBarColor
+                navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ContrastColorOf(navigationBarColor, returnFlat: true)]
+            }
+        }
     }
     
     // MARK: - Add New Items

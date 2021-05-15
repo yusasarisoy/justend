@@ -22,6 +22,11 @@ class CategoryViewController: SwipeTableViewController {
         tableView.rowHeight = 75 // Set the row height of the table view as 75.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.backgroundColor = UIColor(hexString: "FF846C")
+    }
+    
     // MARK: - Add New Categories
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -90,6 +95,9 @@ class CategoryViewController: SwipeTableViewController {
         if let category = categoryArray?[indexPath.row] {
             cell.backgroundColor = UIColor(hexString: category.color ?? "#fd8469")
             cell.textLabel?.text = category.name ?? "No Categories Added Yet"
+            if let categoryColor = UIColor(hexString: category.color ?? "FF846C") {
+                cell.textLabel?.textColor = ContrastColorOf(categoryColor, returnFlat: true)
+            }
         }
         return cell
     }
