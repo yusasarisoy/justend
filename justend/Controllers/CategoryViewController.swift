@@ -14,12 +14,11 @@ class CategoryViewController: SwipeTableViewController {
     private let realm = try! Realm()
     
     /// This variable holds the to do list categories as the type of [**Category**].
-    var categoryArray: Results<Category>?
+    var categories: Results<Category>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCategories() // This function provides to load the whole to do list categories.
-        tableView.rowHeight = 75 // Set the row height of the table view as 75.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +39,7 @@ class CategoryViewController: SwipeTableViewController {
         }
         
         alert.addTextField { alertTextField in
-            alertTextField.placeholder = "Create New Category"
+            alertTextField.placeholder = "Add New Category"
             textField = alertTextField
         }
         
@@ -65,15 +64,16 @@ class CategoryViewController: SwipeTableViewController {
     
     /// This function provides to load the whole to do list categories.
     private func loadCategories() {
-        categoryArray = realm.objects(Category.self)
+        categories = realm.objects(Category.self)
         tableView.reloadData()
+        tableView.rowHeight = 75 // Set the row height of the table view as 75.
     }
     
     /// This function provides to delete the category.
     /// - Parameter indexPath: This parameter holds the **IndexPath** value of the be deleted category.
     override func updateModel(at indexPath: IndexPath) {
         super.updateModel(at: indexPath)
-        if let categoryForDeletion = self.categoryArray?[indexPath.row] {
+        if let categoryForDeletion = self.categories?[indexPath.row] {
             do {
                 try self.realm.write {
                     self.realm.delete(categoryForDeletion)
@@ -87,12 +87,12 @@ class CategoryViewController: SwipeTableViewController {
     // MARK: - UITableView Data Source Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryArray?.count ?? 1
+        return categories?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        if let category = categoryArray?[indexPath.row] {
+        if let category = categories?[indexPath.row] {
             cell.backgroundColor = UIColor(hexString: category.color ?? "#fd8469")
             cell.textLabel?.text = category.name ?? "No Categories Added Yet"
             if let categoryColor = UIColor(hexString: category.color ?? "FF846C") {
@@ -111,7 +111,7 @@ class CategoryViewController: SwipeTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! ToDoListViewController
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedCategory = categoryArray?[indexPath.row]
+            destinationVC.selectedCategory = categories?[indexPath.row]
         }
     }
 }

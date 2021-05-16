@@ -26,12 +26,24 @@ class ToDoListViewController: SwipeTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 75 // Set the row height of the table view as 75.
-        tableView.separatorStyle = .none
+        refreshTableView() // Sets height of the UITableView and disappears the seperators.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        beautifyNavigationController() // Sets the title as category name, set the background color of to-do items based on category color as contrast.
+    }
+    
+    // MARK: - Helpers
+    
+    /// Sets height of the **UITableView** and disappears the seperators.
+    private func refreshTableView() {
+        tableView.rowHeight = 75 // Set the row height of the table view as 75.
+        tableView.separatorStyle = .none
+    }
+    
+    /// Sets the title as category name, set the background color of to-do items based on category color as contrast.
+    private func beautifyNavigationController() {
         title = selectedCategory?.name
         if let hexColor = selectedCategory?.color {
             
